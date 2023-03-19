@@ -5,8 +5,8 @@ description = "Transform AWS Events into dataclasses"
 authors = ["Matthew Raspberry <3092450+mraspberry@users.noreply.github.com>"]
 readme = "README.md"
 license = "BSD-3-Clause"
-homepage = "https://github.com/mraspberry/python-aws-events"
-repository = "https://github.com/mraspberry/python-aws-events"
+homepage = "https://github.com/mraspberry/python-aws-service-events"
+repository = "https://github.com/mraspberry/python-aws-service-events"
 packages = [{include = "aws_service_events"}]
 classifiers = [
     "Development Status :: 1 - Planning",
