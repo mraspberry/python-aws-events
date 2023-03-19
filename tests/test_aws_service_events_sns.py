@@ -1,8 +1,8 @@
 import json
 
 import pytest
-from aws_events.sns import SnsMessage
-from aws_events.exceptions import InvalidSubjectException
+from aws_service_events.sns import SnsMessage
+from aws_service_events.exceptions import InvalidSubjectException
 
 
 @pytest.fixture(name="raw_sns_message")
