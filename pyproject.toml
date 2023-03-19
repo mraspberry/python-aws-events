@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-aws-service-events"
-version = "0.1.0"
+version = "0.1.1"
 description = "Transform AWS Events into dataclasses"
 authors = ["Matthew Raspberry <3092450+mraspberry@users.noreply.github.com>"]
 readme = "README.md"
