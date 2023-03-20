@@ -1,4 +1,4 @@
-# AWS Events
+# AWS Events Types
 
 This package provides decorators for AWS services that issue events
 that automatically transform the events into a dataclass
