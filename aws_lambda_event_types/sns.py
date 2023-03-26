@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass, make_dataclass
-from typing import Any
+from typing import Any, Dict, List, Tuple
 from collections.abc import Callable
 
 import inflection
@@ -14,7 +14,7 @@ class SnsMessage:
         self.subject = subject
 
     @staticmethod
-    def _get_message_fields(message: dict[str, Any]) -> list[tuple[str, type]]:
+    def _get_message_fields(message: Dict[str, Any]) -> List[Tuple[str, type]]:
         fields = list()
         for key in message.keys():
             fields.append((inflection.underscore(key), type(message[key])))
@@ -22,7 +22,7 @@ class SnsMessage:
 
     @decorator
     def __call__(
-        self, wrapped: Callable, instance: type, args: tuple, kwargs: dict
+        self, wrapped: Callable, instance: type, args: tuple, kwargs: Dict
     ) -> Callable:
         sns_messages = SnsMessages(list())
         for record in args[0]["Records"]:
