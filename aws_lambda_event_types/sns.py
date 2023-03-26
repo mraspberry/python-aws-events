@@ -22,7 +22,7 @@ class SnsMessages:
 
     @decorator
     def __call__(
-        self, wrapped: Callable, instance: type, args: tuple, kwargs: Dict
+        self, wrapped: Callable, _: type, args: tuple, kwargs: Dict
     ) -> Callable:
         sns_messages = _SnsMessages()
         for record in args[0]["Records"]:
