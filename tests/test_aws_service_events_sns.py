@@ -1,7 +1,7 @@
 import json
 
 import pytest
-from aws_lambda_event_types.sns import SnsMessage
+from aws_lambda_event_types.sns import SnsMessages
 from aws_lambda_event_types.exceptions import InvalidSubjectException
 
 
@@ -31,17 +31,38 @@ def fixture_raw_sns_message():
     }
 
 
-def test_sns_message_happy_path(raw_sns_messages):
-    @SnsMessage("TestInvoke")
+def test_sns_messages_has_snake_names(raw_sns_messages):
+    @SnsMessages("TestInvoke")
     def fake_handler(sns_messages):
-        assert sns_messages.messages[0].message_source == "test"
-        assert sns_messages.messages[0].another_key == "test"
+        assert sns_messages[0].message_source == "test"
+        assert sns_messages[0].another_key == "test"
 
     fake_handler(raw_sns_messages)
 
 
-def test_sns_message_raises_on_incorrect_subject(raw_sns_messages):
-    @SnsMessage("NonexistentSubject")
+def test_sns_messages_iteration(raw_sns_messages):
+    @SnsMessages("TestInvoke")
+    def fake_handler(sns_messages):
+        iterated = False
+        for message in sns_messages:
+            iterated = True
+            assert message.message_source == "test"
+            assert message.another_key == "test"
+        assert iterated
+
+    fake_handler(raw_sns_messages)
+
+
+def test_sns_messages_len(raw_sns_messages):
+    @SnsMessages("TestInvoke")
+    def fake_handler(sns_messages):
+        assert len(sns_messages) == 1
+
+    fake_handler(raw_sns_messages)
+
+
+def test_sns_messages_raises_on_incorrect_subject(raw_sns_messages):
+    @SnsMessages("NonexistentSubject")
     def fake_handler(sns_message):
         pass
 
